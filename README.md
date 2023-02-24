@@ -1,5 +1,5 @@
 # Assignment 3
-##Problem 1
+## Problem 1
 Write a program that opens a file and counts the whitespace-separated words in that file. You may obtain the name of the input file either from the command line or via prompt and user input. Be sure to clearly document the method chosen.
 
 You may test your program using any number of text files; however, you must be sure to test your program using the Sample Text File provided at the end of this assignment (excerpt.txt). This file is also available in the Assessment section of the course home page.

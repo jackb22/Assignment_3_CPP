@@ -1,1 +1,96 @@
+/*
+ * Title: Problem_1.cpp
+ * Date: Febuary  10th, 2023
+ * Author: Jack Bennett
+ * Version: 1.0
+ */
+
+/* Documentation
+ *
+ * Program Purpose: This program counts the number of whitespace-separated words in a file.
+ *
+ * Classes: None
+ *
+ * Notes: This program has the user declare the path of the file in the terminal.
+ *
+ * Variables:
+ *     filename: string - holds the name of the input  file
+ *     input_file: ifstream - holds the file to be read
+ *     word_count: integer - Represents the number of whitespace-separated words in a file
+ *     word: string - Represents each whitespace-separated word in a file
+ *     filename: string - Declared in main, holds the name of the input file
+ *     word_count: integer - Declared in main, holds the number of whitespace seperated words in the input file.
+ *                  Returned by the count_words_in_file method.
+ *
+ */
+
+/*
+ * Test Plan:
+ *
+ * Normal Case(valid file path, program runs successfully):
+ *    Enter the path to the input file: /Users/jackbennett/desktop/excerpt.txt
+ *    The file /Users/jackbennett/desktop/excerpt.txt contains 359 whitespace-separated words.
+ *
+ *    Process finished with exit code 0
+ *
+ *
+ * Bad Case(invalid file path):
+ *  Enter the path to the input file: exerpt.txt
+ *  Error: unable to open input file exerpt.txt
+ *
+ *  Process finished with exit code 0
+ *
+ */
+
+
+
+
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+// Function to count the number of whitespace-separated words in a file
+int count_words_in_file(const std::string& filename) {
+    // Open the input file
+    std::ifstream input_file(filename);
+
+    // Check if the file was successfully opened
+    if (!input_file) {
+        // Print an error message to standard error
+        std::cerr << "Error: unable to open input file " << filename << std::endl;
+        // Return a negative number to indicate an error
+        return -1;
+    }
+
+    // Count the number of whitespace-separated words in the file
+    int word_count = 0;
+    std::string word;
+    while (input_file >> word) {
+        word_count++;
+    }
+
+    // Return the total word count
+    return word_count;
+}
+
+
+
+int main() {
+    // Prompt the user for the input filename
+    std::string filename;
+    std::cout << "Enter the path to the input file: ";
+    std::cin >> filename;
+
+    // Calling the count_words_in_file method
+    int word_count = count_words_in_file(filename);
+
+    // Print the word count (if it's non-negative)
+    if (word_count >= 0) {
+        std::cout << "The file " << filename << " contains " << word_count << " whitespace-separated words." << std::endl;
+    }
+
+    // Return 0 to indicate successful completion of the program
+    return 0;
+}
 

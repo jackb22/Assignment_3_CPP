@@ -1,1 +1,78 @@
 
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
+class TextFileReader {
+private:
+    std::string lines[100];  // instance variable consisting of an array of 100 elements
+public:
+    TextFileReader() {}  // default constructor
+
+    //constructor
+    TextFileReader(const std::string& filename) {
+        std::ifstream file(filename);  // open the file
+        // check if the file was opened successfully
+        if (file.is_open()) {
+            std::string line;
+            int i = 0;
+            // read the file line by line
+            while (std::getline(file, line) && i < 100) {
+                lines[i] = line;
+                i++;
+            }
+            file.close();  // close the file
+        } else {
+            // display an error message if the file could not be opened
+            std::cerr << "Error: could not open file." << std::endl;
+        }
+    }
+
+    //deconstructor
+
+    ~TextFileReader() {}
+
+    // method  that converts the array of Strings into a single StringBuffer
+    std::string contents() {
+        std::stringstream buffer;
+        // iterate through the array of Strings
+        for (int i = 0; i < 100 && !lines[i].empty(); i++) {
+            buffer << lines[i] <<std::endl; // append the line to the buffer
+        }
+        return buffer.str();
+    }
+
+
+    // method that displays the contents of the file with line numbers
+    void display() {
+        std::stringstream buffer;
+        // iterate through the array of Strings
+        for (int i = 0; i < 100 && !lines[i].empty(); i++) {
+            buffer << "line " << i+1 << ": " << lines[i] << std::endl;
+        }
+        std::cout << buffer.str();
+    }
+};
+
+
+class TextFileReaderDemo {
+public:
+    static int main() {
+        std::string fileName;
+        std::cout << "Please enter the filename: ";
+        std::cin >> fileName;
+        TextFileReader reader(fileName); // create an instance of TextFileReader with the filename
+        std::cout << "Contents of the file: " <<  std::endl;
+        std::cout << reader.contents() <<  std::endl; // display
+        std::cout << "Displaying contents with line numbers:" <<  std::endl;
+        reader.display(); // display the contents of the file with line numbers
+        return 0;
+    }
+};
+
+
+int main() {
+    return TextFileReaderDemo::main();
+}

@@ -1,1 +1,152 @@
+/*
+ * Title: Problem_4.cpp
+ * Date: February  10th, 2023
+ * Author: Jack Bennett
+ * Version: 1.0
+ */
 
+/* Documentation
+ *
+ * Program Purpose: This program will create three arrays of floating-point numbers.
+ *                  The first array will be filled with the numbers 0 through 24.
+ *                  The second array will be filled with the squares of the numbers 0 through 24.
+ *                  The third array will be filled with the sum of the corresponding elements of the first two arrays.
+ *                  The program will then display the contents of all three arrays.
+ *
+ * Classes: N/A
+ *
+ * Notes: N/A
+ *
+ * Variables:
+ *  Size- int - constant integer variable to hold the size of the arrays
+ *  i- int - integer variable to hold the index of the arrays
+ *  array1- float - array to hold the numbers 0 through 24
+ *  array2- float - array to hold the squares of the numbers 0 through 24
+ *  array3- float - array to hold the sum of the  elements of the first two arrays
+ *
+ */
+
+/*
+ * Test Plan:
+ *
+ * Normal Case(program runs successfully):
+ *   0; 0 + 0 = 0
+ *   1; 1 + 1 = 2
+ *   2; 2 + 4 = 6
+ *   3; 3 + 9 = 12
+ *   4; 4 + 16 = 20
+ *   5; 5 + 25 = 30
+ *   6; 6 + 36 = 42
+ *   7; 7 + 49 = 56
+ *   8; 8 + 64 = 72
+ *   9; 9 + 81 = 90
+ *   10; 10 + 100 = 110
+ *   11; 11 + 121 = 132
+ *   12; 12 + 144 = 156
+ *   13; 13 + 169 = 182
+ *   14; 14 + 196 = 210
+ *   15; 15 + 225 = 240
+ *   16; 16 + 256 = 272
+ *   17; 17 + 289 = 306
+ *   18; 18 + 324 = 342
+ *   19; 19 + 361 = 380
+ *   20; 20 + 400 = 420
+ *   21; 21 + 441 = 462
+ *   22; 22 + 484 = 506
+ *   23; 23 + 529 = 552
+ *   24; 24 + 576 = 600
+ *
+ *   Process finished with exit code 0
+ *
+ * Bad case(fill array2 method is incorrectly implemented):
+ *   // method to fill array2 (incorrect implementation)
+ *    void fill_array2(float array2[]) {
+ *    // iterate through array and fill with incorrect squares
+ *    for (int i = 0; i < SIZE; i++) {
+ *       array2[i] = i * i + 1; // add 1 to the square value
+ *        }
+ *    }
+ *
+ *
+ *    0; 0 + 1 = 1
+ *    1; 1 + 2 = 3
+ *    2; 2 + 5 = 7
+ *    3; 3 + 10 = 13
+ *    4; 4 + 17 = 21
+ *    5; 5 + 26 = 31
+ *    6; 6 + 37 = 43
+ *    7; 7 + 50 = 57
+ *    8; 8 + 65 = 73
+ *    9; 9 + 82 = 91
+ *    10; 10 + 101 = 111
+ *    11; 11 + 122 = 133
+ *    12; 12 + 145 = 157
+ *    13; 13 + 170 = 183
+ *    14; 14 + 197 = 211
+ *    15; 15 + 226 = 241
+ *    16; 16 + 257 = 273
+ *    17; 17 + 290 = 307
+ *    18; 18 + 325 = 343
+ *    19; 19 + 362 = 381
+ *    20; 20 + 401 = 421
+ *    21; 21 + 442 = 463
+ *    22; 22 + 485 = 507
+ *    23; 23 + 530 = 553
+ *    24; 24 + 577 = 601
+ *
+ *
+ */
+
+
+#include <iostream>
+
+// Declare variable  size as a constant integer
+const int SIZE = 25;
+
+// method to fill array1
+void fill_array1(float array1[]) {
+    // iterate through array and fill with numbers
+    for (int i = 0; i < SIZE; i++) {
+        array1[i] = i;
+    }
+}
+
+// method to fill array2
+void fill_array2(float array2[]) {
+    // iterate through array and fill with squares
+    for (int i = 0; i < SIZE; i++) {
+        array2[i] = i * i; // used to get the square of the number
+    }
+}
+
+// method to add array1 and array2
+void add_arrays(const float array1[], const float array2[], float array3[]) {
+    // iterate through arrays and add values
+    for (int i = 0; i < SIZE; i++) {
+        array3[i] = array1[i] + array2[i];
+    }
+}
+
+// method to display arrays
+void display_arrays(const float array1[], const float array2[], const float array3[]) {
+    // iterate through arrays and display values
+    for (int i = 0; i < SIZE; i++) {
+        std::cout << i << "; " << array1[i] << " + " << array2[i] << " = " << array3[i] << std::endl;
+    }
+}
+
+
+int main() {
+    // Create three floating-point arrays
+    float array1[SIZE];
+    float array2[SIZE];
+    float array3[SIZE];
+
+    // Calling  methods to fill arrays, add arrays, and display arrays
+    fill_array1(array1);
+    fill_array2(array2);
+    add_arrays(array1, array2, array3);
+    display_arrays(array1, array2, array3);
+
+    return 0;
+}

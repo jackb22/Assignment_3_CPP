@@ -1,3 +1,253 @@
+/*
+ * Title: Problem_5.cpp
+ * Date: February 8th, 2023
+ * Author: Jack Bennett
+ * Version: 1.0
+ */
+
+/* Documentation
+ *
+ * Program Purpose: This program provides a basic implementation of a bookshelf.
+ *                  It allows the user to enter the title, author, publisher, ISBN, year of publication, and edition of a book.
+ *
+ *
+ *
+ * Classes: Book - This class holds the data for a book. It has a constructor that takes in the title, author, publisher, ISBN, year of publication, and edition of a book.
+ *          compareTitle - This class hold a  compare method that takes in the title of two books and returns true if the title of the first book is alphabetically before the title of the second book.
+ *          Bookshelf - This class holds a vector of books. It has a constructor that takes in a vector of books and a method that sorts the books in the vector by title and year of publication.
+ *
+ *
+ * Notes:  ISBN is a string because it needs to be  a 13 digit's . The int data type can store numbers with a maximum of 10 digits,
+ *         which means that it cannot hold an ISBN without truncating some digits. Therefore, it is necessary to use a string to store the ISBN.
+ *
+ *
+ * Variables:
+ *  title - String - Holds  the tile of the given book
+ *
+ *  author - String - Holds the author of the given book
+ *
+ *  publisher - String - Hold the Publisher of the given book.
+ *
+ *  isbn  - String - Hold the ISBN of the given book
+ *
+ *  year - Int - holds the year of the given book
+ *
+ *  edition - Int - hold the year of a given book
+ *
+ *  Books - Vector - Holds a vector of books
+ *
+ *
+ *
+ */
+
+
+/*
+ Test Plan:
+
+ Normal case(all data enters correctly and program runs as expected) :
+    Books in the order they were entered:
+    Title: Harry Potter and the Philosopher's Stone
+    ISBN: 978-1408855652
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 1997
+
+    Title: Harry Potter and the Chamber of Secrets
+    ISBN: 978-1408855669
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 1998
+
+    Title: Harry Potter and the Prisoner of Azkaban
+    ISBN: 978-1408855676
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 1999
+
+    Title: Harry Potter and the Goblet of Fire
+    ISBN: 978-1408855683
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 2000
+
+    Title: Harry Potter and the Order of Phoenix
+    ISBN: 978-1408855690
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 2003
+
+    Title: Harry Potter and the Half-Blood Prince
+    ISBN: 978-1408855706
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 2005
+
+    Title: Harry Potter and the Deathly Hallows
+    ISBN: 978-1408855713
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 2007
+
+    Title: City of Bones
+    ISBN: 978-1416955078
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2007
+
+    Title: City of Ashes
+    ISBN: 978-1416972242
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2008
+
+    Title: City of Glass
+    ISBN: 978-1416914303
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2009
+
+    Title: City of Fallen Angels
+    ISBN: 978-1442403543
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2011
+
+    Title: City of Lost Souls
+    ISBN: 978-1442403550
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2012
+
+
+    Books sorted by title and year of publication:
+    Title: City of Ashes
+    ISBN: 978-1416972242
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2008
+
+    Title: City of Bones
+    ISBN: 978-1416955078
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2007
+
+    Title: City of Fallen Angels
+    ISBN: 978-1442403543
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2011
+
+    Title: City of Glass
+    ISBN: 978-1416914303
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2009
+
+    Title: City of Lost Souls
+    ISBN: 978-1442403550
+    Author: Cassandra Clare
+    Edition: 1
+    Publisher: Margaret K. McElderry Books
+    Year of Publication: 2012
+
+    Title: Harry Potter and the Chamber of Secrets
+    ISBN: 978-1408855669
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 1998
+
+    Title: Harry Potter and the Deathly Hallows
+    ISBN: 978-1408855713
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 2007
+
+    Title: Harry Potter and the Goblet of Fire
+    ISBN: 978-1408855683
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 2000
+
+    Title: Harry Potter and the Half-Blood Prince
+    ISBN: 978-1408855706
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 2005
+
+    Title: Harry Potter and the Order of Phoenix
+    ISBN: 978-1408855690
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 2003
+
+    Title: Harry Potter and the Philosopher's Stone
+    ISBN: 978-1408855652
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 1997
+
+    Title: Harry Potter and the Prisoner of Azkaban
+    ISBN: 978-1408855676
+    Author: J.K. Rowling
+    Edition: 1
+    Publisher: Bloomsbury Publishing
+    Year of Publication: 1999
+
+    Bad case (Book title is not entered)
+    Invalid title
+
+    Process finished with exit code 1
+
+    Bad case( ISBN is entered incorectly )
+    Invalid ISBN for book "Harry Potter and the Philosopher's Stone"
+
+    Process finished with exit code 1
+
+    Bad case (no author name given for book)
+    Invalid author for book "Harry Potter and the Philosopher's Stone"
+
+    Process finished with exit code 1
+
+    Bad case (no  edition given for book )
+    Invalid edition for book "Harry Potter and the Philosopher's Stone"
+
+    Process finished with exit code 1
+
+    Bad case (no publisher name given for book)
+    Invalid publisher for book "Harry Potter and the Philosopher's Stone"
+
+    Process finished with exit code 1
+
+    Bad case (incorrect year of publication)
+    Invalid year for book "Harry Potter and the Philosopher's Stone"
+
+    Process finished with exit code 1
+ */
+
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -14,21 +264,30 @@ private:
 
 
 public:
+    //default constructor
+    Book() {};
+
     //Constructor
-    Book(std::string title, std::string isbn, std::string author, int edition, std::string publisher, int year) {
-        this->title = std::move(title);
-        this->isbn = std::move(isbn);
-        this->author = std::move(author);
-        this->edition = edition;
-        this->publisher = std::move(publisher);
-        this->year = year;
+    Book(const std::string& title, const std::string& isbn, const std::string& author, int edition, const std::string& publisher, int year) {
+        setTitle(title);
+        setISBN(isbn);
+        setAuthor(author);
+        setEdition(edition);
+        setPublisher(publisher);
+        setYear(year);
     }
 
     // setters
 
     //set title
+
     void setTitle(const std::string& title) {
-        this->title = title;
+        if (!title.empty()) {
+            this->title = title;
+        } else {
+            std::cerr << "Invalid title" << std::endl;
+            exit(1); // exit the program with an error
+        }
     }
 
     // set isbn
@@ -37,28 +296,49 @@ public:
         if (isbn.length() == 13 && isbn.find_first_not_of("0123456789") == std::string::npos) {
             this->isbn = isbn;
         } else {
-            std::cout << "Invalid ISBN" << std::endl;
+            std::cerr << "Invalid ISBN for book \"" << this-> title << "\"" << std::endl;
+            exit(1); // exit the program with an error
         }
     }
 
     // set author
     void setAuthor(const std::string& author) {
-        this->author = author;
+        if (!author.empty()) {
+            this->author = author;
+        } else {
+            std::cerr << "Invalid author for book \"" << this-> title << "\"" << std::endl;
+            exit(1); // exit the program with an error
+        }
     }
 
     // set edition
     void setEdition(int edition) {
-        this->edition = edition;
+        if (edition >= 1) {
+            this->edition = edition;
+        } else {
+            std::cerr << "Invalid edition for book \"" << this -> title << "\"" << std::endl;
+            exit(1); // exit the program with an error
+        }
     }
 
     // set publisher
     void setPublisher(const std::string& publisher) {
-        this->publisher = publisher;
+        if (!publisher.empty()) {
+            this->publisher = publisher;
+        } else {
+            std::cerr << "Invalid publisher for book \""<< this-> title <<"\"" << std::endl;
+            exit(1); // exit the program with an error
+        }
     }
 
     // set year
     void setYear(int year) {
-        this->year = year;
+        if (year > 0 && year < 3000) {
+            this->year = year;
+        } else {
+            std::cerr << "Invalid year for book \""<< this-> title <<"\"" << std::endl;
+            exit(1); // exit the program with an error
+        }
     }
 
     //Getters
@@ -93,13 +373,13 @@ public:
         return edition;
     }
 
-    void displayInfo() {
-        std::cout << "Title: " << title << std::endl;
-        std::cout << "ISBN: " << isbn << std::endl;
-        std::cout << "Author: " << author << std::endl;
-        std::cout << "Edition: " << edition << std::endl;
-        std::cout << "Publisher: " << publisher << std::endl;
-        std::cout << "Year of Publication: " << year << std::endl;
+    void displayInfo() const {
+        std::cout << "Title: " << getTitle() << std::endl;
+        std::cout << "ISBN: " << getISBN() << std::endl;
+        std::cout << "Author: " << getAuthor() << std::endl;
+        std::cout << "Edition: " << getEdition() << std::endl;
+        std::cout << "Publisher: " << getPublisher() << std::endl;
+        std::cout << "Year: " << getYear() << std::endl;
     }
 
 };
@@ -119,7 +399,7 @@ public:
 
 class Bookshelf{
 public:
-    
+
     static void displayBookList(const std::vector<Book>& books) {
         std::cout << "Books in the order they were entered:" << std::endl;
         for (Book book : books) {
@@ -140,20 +420,20 @@ public:
     static void main() {
         std::vector<Book> Books;
         // Adding books to the vector
-        Books.emplace_back("Harry Potter and the Philosopher's Stone", "978-1408855652", "J.K. Rowling", 1,"Bloomsbury Publishing", 1997);
-        Books.emplace_back("Harry Potter and the Chamber of Secrets", "978-1408855669", "J.K. Rowling", 1,"Bloomsbury Publishing", 1998);
-        Books.emplace_back("Harry Potter and the Prisoner of Azkaban", "978-1408855676", "J.K. Rowling", 1,"Bloomsbury Publishing", 1999);
-        Books.emplace_back("Harry Potter and the Goblet of Fire", "978-1408855683", "J.K. Rowling", 1,"Bloomsbury Publishing", 2000);
-        Books.emplace_back("Harry Potter and the Order of Phoenix", "978-1408855690", "J.K. Rowling", 1,"Bloomsbury Publishing", 2003);
-        Books.emplace_back("Harry Potter and the Half-Blood Prince", "978-1408855706", "J.K. Rowling", 1,"Bloomsbury Publishing", 2005);
-        Books.emplace_back("Harry Potter and the Deathly Hallows", "978-1408855713", "J.K. Rowling", 1,"Bloomsbury Publishing", 2007);
-        Books.emplace_back("City of Bones", "978-1416955078", "Cassandra Clare", 1, "Margaret K. McElderry Books",2007);
-        Books.emplace_back("City of Ashes", "978-1416972242", "Cassandra Clare", 1, "Margaret K. McElderry Books",2008);
-        Books.emplace_back("City of Glass", "978-1416914303", "Cassandra Clare", 1, "Margaret K. McElderry Books",2009);
-        Books.emplace_back("City of Fallen Angels", "978-1442403543", "Cassandra Clare", 1,"Margaret K. McElderry Books", 2011);
-        Books.emplace_back("City of Lost Souls", "978-1442403550", "Cassandra Clare", 1, "Margaret K. McElderry Books",2012);
+        Books.emplace_back("Harry Potter and the Philosopher's Stone", "9780747532746", "J.K. Rowling", 1,"Bloomsbury Publishing", 1997);
+        Books.emplace_back("Harry Potter and the Chamber of Secrets", "9780439064866", "J.K. Rowling", 1,"Bloomsbury Publishing", 1998);
+        Books.emplace_back("Harry Potter and the Prisoner of Azkaban", "9780747542155", "J.K. Rowling", 1,"Bloomsbury Publishing", 1999);
+        Books.emplace_back("Harry Potter and the Goblet of Fire", "9780747546245", "J.K. Rowling", 1,"Bloomsbury Publishing", 2000);
+        Books.emplace_back("Harry Potter and the Order of Phoenix", "9780439358064", "J.K. Rowling", 1,"Bloomsbury Publishing", 2003);
+        Books.emplace_back("Harry Potter and the Half-Blood Prince", "9781551927565", "J.K. Rowling", 1,"Bloomsbury Publishing", 2005);
+        Books.emplace_back("Harry Potter and the Deathly Hallows", "9781408855713", "J.K. Rowling", 1,"Bloomsbury Publishing", 2007);
+        Books.emplace_back("City of Bones", "9781416955078", "Cassandra Clare", 1, "Margaret K. McElderry Books",2007);
+        Books.emplace_back("City of Ashes", "9781416972242", "Cassandra Clare", 1, "Margaret K. McElderry Books",2008);
+        Books.emplace_back("City of Glass", "9781416914303", "Cassandra Clare", 1, "Margaret K. McElderry Books",2009);
+        Books.emplace_back("City of Fallen Angels", "9781442403543", "Cassandra Clare", 1,"Margaret K. McElderry Books", 2011);
+        Books.emplace_back("City of Lost Souls", "9781442403550", "Cassandra Clare", 1, "Margaret K. McElderry Books",2012);
 
-        
+
         displayBookList(Books);
         std::cout << std::endl;
         displaySortedBookList(Books);
@@ -165,4 +445,3 @@ int main() {
     Bookshelf::main();
     return 0;
 }
-
